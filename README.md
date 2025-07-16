@@ -1,6 +1,6 @@
 # Collapsible Sidebar Using HTML CSS JavaScript Font Awesome
 
-[![Build a Collapsible Sidebar](https://github.com/Muzammil-khan-uni/Collapsible-Sidebar-Using-HTML-CSS-JavaScript-Font-Awesome/blob/main/Build%20a%20Collapsible%20Sidebar.mp4)
+![Build a Collapsible Sidebar](https://github.com/Muzammil-khan-uni/Collapsible-Sidebar-Using-HTML-CSS-JavaScript-Font-Awesome/blob/main/Build%20a%20Collapsible%20Sidebar.mp4)
 
 🛠 Technologies Used: HTML, CSS, JavaScript, Font Awesome
 
