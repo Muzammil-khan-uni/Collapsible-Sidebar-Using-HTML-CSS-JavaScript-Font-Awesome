@@ -204,42 +204,45 @@
   </div>
 
   <script>
-    const sidebar = document.getElementById("sidebar");
-    const overlay = document.getElementById("overlay");
-    const defaultLogo = "https://www.w3schools.com/howto/img_avatar.png";
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("overlay");
+const defaultLogo = "https://www.w3schools.com/howto/img_avatar.png";
 
-    function toggleSidebar() {
-      sidebar.classList.toggle("open");
-      overlay.classList.toggle("active");
-    }
+function toggleSidebar() {
+  sidebar.classList.toggle("open");
+  overlay.classList.toggle("active");
+}
 
-    function closeSidebar() {
-      sidebar.classList.remove("open");
-      overlay.classList.remove("active");
-    }
+function closeSidebar() {
+  sidebar.classList.remove("open");
+  overlay.classList.remove("active");
+}
 
-    function previewLogo(event) {
-      const input = event.target;
-      const preview = document.getElementById("logoPreview");
-      if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          preview.src = e.target.result;
-        };
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
+function previewLogo(event) {
+  const input = event.target;
+  const preview = document.getElementById("logoPreview");
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      preview.src = e.target.result;
+      input.value = "";
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
 
-    function deleteLogo() {
-      const preview = document.getElementById("logoPreview");
-      preview.src = defaultLogo;
-    }
+function deleteLogo() {
+  const preview = document.getElementById("logoPreview");
+  preview.src = defaultLogo;
+  document.querySelector(".logo input[type='file']").value = "";
+}
 
-    document.querySelectorAll('.sidebar ul li').forEach(item => {
-      item.addEventListener('click', () => {
-        closeSidebar();
-      });
-    });
+document.querySelectorAll('.sidebar ul li').forEach(item => {
+  item.addEventListener('click', () => {
+    closeSidebar();
+  });
+});
+
   </script>
 
 </body>
