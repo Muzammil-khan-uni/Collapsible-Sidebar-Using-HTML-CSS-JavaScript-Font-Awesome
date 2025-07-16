@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Build a Collapsible Sidebar</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #c4cee9;
+      color: #181717;
+      margin: 0;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background-color: #1e1e2f;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      z-index: 1101; 
+    }
+
+    .toggle-btn {
+      background-color: transparent;
+      color: white;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #1e1e2f;
+      color: white;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+      overflow-y: auto;
+      z-index: 1100; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 60px; 
+    }
+
+    .sidebar.open {
+      transform: translateX(0);
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1090; 
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .logo {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 20px 0;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #444;
+      background-color: #444;
+    }
+
+    .upload-icon,
+    .delete-icon {
+      position: absolute;
+      background: #33334d;
+      border-radius: 50%;
+      padding: 6px;
+      cursor: pointer;
+      border: 2px solid #1e1e2f;
+      transition: background 0.3s;
+      color: #fff;
+    }
+
+    .upload-icon:hover,
+    .delete-icon:hover {
+      background: #555570;
+    }
+
+    .upload-icon {
+      bottom: 0;
+      right: 0;
+    }
+
+    .delete-icon {
+      bottom: 0;
+      left: 0;
+    }
+
+    .logo input[type="file"] {
+      display: none;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 20px 0;
+      width: 100%;
+    }
+
+    .sidebar ul li {
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .sidebar ul li:hover {
+      background-color: #2e2e45;
+    }
+
+    .sidebar ul li i {
+      margin-right: 10px;
+    }
+
+    .content {
+      padding: 80px 20px 20px 20px; 
+      transition: margin-left 0.3s;
+    }
+
+    @media (min-width: 769px) {
+      .content {
+        margin-left: 250px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <button class="toggle-btn" onclick="toggleSidebar()">
+      <i class="fas fa-bars"></i>
+    </button>
+    <span style="margin-left:10px;">My App</span>
+  </div>
+
+  <div class="sidebar" id="sidebar">
+    <div class="logo">
+      <img
+        id="logoPreview"
+        src="https://www.w3schools.com/howto/img_avatar.png"
+        alt="Profile Logo"
+      />
+      <label class="upload-icon">
+        <i class="fas fa-pen"></i>
+        <input type="file" accept="image/*" onchange="previewLogo(event)">
+      </label>
+      <div class="delete-icon" onclick="deleteLogo()">
+        <i class="fas fa-trash"></i>
+      </div>
+    </div>
+    <ul>
+      <li><i class="fas fa-home"></i> Home</li>
+      <li><i class="fas fa-info-circle"></i> About Us</li>
+      <li><i class="fas fa-envelope"></i> Messages</li>
+      <li><i class="fas fa-cog"></i> Settings</li>
+      <li><i class="fas fa-sign-out-alt"></i> Logout</li>
+    </ul>
+  </div>
+
+  <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+  <div class="content">
+    <h1>Welcome</h1>
+    <p>This is the main content area. On mobile, the sidebar overlays the content with a backdrop. On desktop, the sidebar pushes the content to the right.</p>
+  </div>
+
+  <script>
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+    const defaultLogo = "https://www.w3schools.com/howto/img_avatar.png";
+
+    function toggleSidebar() {
+      sidebar.classList.toggle("open");
+      overlay.classList.toggle("active");
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove("open");
+      overlay.classList.remove("active");
+    }
+
+    function previewLogo(event) {
+      const input = event.target;
+      const preview = document.getElementById("logoPreview");
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    function deleteLogo() {
+      const preview = document.getElementById("logoPreview");
+      preview.src = defaultLogo;
+    }
+
+    document.querySelectorAll('.sidebar ul li').forEach(item => {
+      item.addEventListener('click', () => {
+        closeSidebar();
+      });
+    });
+  </script>
+
+</body>
+</html>
