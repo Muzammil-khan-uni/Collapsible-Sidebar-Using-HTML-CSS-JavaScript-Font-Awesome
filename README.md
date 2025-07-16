@@ -27,11 +27,11 @@ I created a fully functional collapsible sidebar with a clean layout and smooth 
 
 ✅ A toggle button in the top navbar to open/close the sidebar
 
- ✅ A list of interactive navigation links, each with relevant icons
+✅ A list of interactive navigation links, each with relevant icons
 
- ✅ A responsive overlay that dims the background when sidebar open
+✅ A responsive overlay that dims the background when sidebar open
 
- ✅ Full mobile responsiveness for an optimized experience across all devices
+✅ Full mobile responsiveness for an optimized experience across all devices
 
- ✅ Polished animations for a seamless user interaction
+✅ Polished animations for a seamless user interaction
 
