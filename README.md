@@ -2,6 +2,7 @@
 
 🔗 Check live demo at: https://muzammil-khan-uni.github.io/Collapsible-Sidebar-Using-HTML-CSS-JavaScript-Font-Awesome/
 
+
 ![Build a Collapsible Sidebar](https://github.com/Muzammil-khan-uni/Collapsible-Sidebar-Using-HTML-CSS-JavaScript-Font-Awesome/blob/main/Output%20Screen.png)
 
 <h2>After Uploading logo</h2>
